@@ -6,41 +6,9 @@
     <title>Async Function Example</title>
 </head>
 <body>
+    <button id="btn">Fetch Data</button>
+    <div id="output"></div>
 
-<script>
-    // Async function that takes a callback
-    async function fetchData(callback) {
-        try {
-            // Simulate an asynchronous operation with a Promise
-            const result = await new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve("Data fetched successfully!");
-                }, 2000); // Simulating a delay of 2 seconds
-            });
-
-            // Call the callback function with the result
-            callback(null, result);
-        } catch (error) {
-            // Handle errors if any
-            callback(error, null);
-        }
-    }
-
-    // Callback function to display a message on the webpage
-    function displayMessage(error, result) {
-        const messageElement = document.createElement('p');
-        if (error) {
-            messageElement.textContent = `Error: ${error.message}`;
-        } else {
-            messageElement.textContent = result;
-        }
-
-        document.body.appendChild(messageElement);
-    }
-
-    // Using the async function to fetch data and display a message
-    fetchData(displayMessage);
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

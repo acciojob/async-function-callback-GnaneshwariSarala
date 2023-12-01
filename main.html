@@ -1,15 +1,46 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Function Example</title>
+</head>
+<body>
 
-<html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<script>
+    // Async function that takes a callback
+    async function fetchData(callback) {
+        try {
+            // Simulate an asynchronous operation with a Promise
+            const result = await new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("Data fetched successfully!");
+                }, 2000); // Simulating a delay of 2 seconds
+            });
 
-  <body>
-    <!-- the entire body must be written by student -->
-    <button id="btn">Fetch</button>
-    <div id="output"></div>
+            // Call the callback function with the result
+            callback(null, result);
+        } catch (error) {
+            // Handle errors if any
+            callback(error, null);
+        }
+    }
 
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
+    // Callback function to display a message on the webpage
+    function displayMessage(error, result) {
+        const messageElement = document.createElement('p');
+        if (error) {
+            messageElement.textContent = `Error: ${error.message}`;
+        } else {
+            messageElement.textContent = result;
+        }
+
+        document.body.appendChild(messageElement);
+    }
+
+    // Using the async function to fetch data and display a message
+    fetchData(displayMessage);
+</script>
+
+</body>
 </html>
